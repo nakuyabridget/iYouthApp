@@ -34,8 +34,14 @@ export class ApiService {
   }
 
   // API: POST /jobs
-  public createJob(job: Job) {
+  public createJob(job: Job): Observable<Job> {
     // will use this.http.post()
+    return this.http
+      .post(API_URL + 'jobs', job)
+      .pipe(map(response => {
+        return new Job(response.json());
+      }), catchError(this.handleError)
+      );
   }
 
   // API: GET /jobs/:id
