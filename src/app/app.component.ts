@@ -23,4 +23,15 @@ export class AppComponent implements OnInit {
         jobs => this.jobs = jobs
       );
   }
+
+  // Method to create a job triggered by an event
+  onAddJob(job: Job) {
+    this.jobDataService
+      .addJob(job)
+      .subscribe(
+        (newJob) => {
+          this.jobs = this.jobs.concat(newJob);
+        }
+      );
+  }
 }
