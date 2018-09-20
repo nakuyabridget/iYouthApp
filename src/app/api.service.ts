@@ -2,6 +2,10 @@ import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Job } from './job';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+const API_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +16,14 @@ export class ApiService {
   constructor(private http: Http) { }
 
   // API: GET /jobss
-  public getAllJobs() {
+  public getAllJobs(): Observable<Job[]> {
     // will use this.http.get()
+    return this.http
+      .get(API_URL + '/jobs')
+      .pipe(map(response => {
+        const jobs = response.json();
+        return jobs.map((job) => new Job(job));
+      }));
   }
 
   // API: POST /jobs
