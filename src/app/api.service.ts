@@ -1,6 +1,6 @@
 import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Job } from './job';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -29,7 +29,8 @@ export class ApiService {
       .pipe(map(response => {
         const jobs = response.json();
         return jobs.map((job) => new Job(job));
-      }), catchError(this.handleError));
+      }), catchError(this.handleError)
+      );
   }
 
   // API: POST /jobs
@@ -38,8 +39,14 @@ export class ApiService {
   }
 
   // API: GET /jobs/:id
-  public getJobById(jobId: number) {
+  public getJobById(jobId: number): Observable<Job> {
     // will use this.http.get()
+    return this.http
+      .get(API_URL + '/jobs/' + jobId)
+      .pipe(map(response => {
+        return new Job(response.json());
+      }), catchError(this.handleError)
+      );
   }
 
   // API: PUT /jobs/:id
