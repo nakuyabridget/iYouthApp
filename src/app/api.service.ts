@@ -56,8 +56,14 @@ export class ApiService {
   }
 
   // API: PUT /jobs/:id
-  public updateJob(job: Job) {
+  public updateJob(job: Job): Observable<Job> {
     // will use this.http.put()
+    return this.http
+      .put(API_URL + '/jobss/' + job.id, job)
+      .pipe(map(response => {
+        return new Job(response.json());
+      }), catchError(this.handleError)
+      );
   }
 
   // DELETE /jobs/:id
