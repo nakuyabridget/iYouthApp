@@ -67,8 +67,12 @@ export class ApiService {
   }
 
   // DELETE /jobs/:id
-  public deleteJobById(jobId: number) {
+  public deleteJobById(jobId: number): Observable<null>{
     // will use this.http.delete()
+    return this.http
+      .delete(API_URL + 'jobs/' + jobId)
+      .pipe(map(response => null), catchError(this.handleError)
+      );
   }
 
 }
