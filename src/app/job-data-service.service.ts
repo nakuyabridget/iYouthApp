@@ -32,4 +32,9 @@ export class JobDataServiceService {
     return this.api.updateJob(job);
   }
 
+  // Simulate delete a job
+  deleteJobById(jobId: number): Observable<Job> {
+    return this.api.deleteJobById(jobId)
+  }
+
 }

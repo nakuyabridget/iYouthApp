@@ -34,4 +34,17 @@ export class AppComponent implements OnInit {
         }
       );
   }
+
+  // Method to remove a job triggered by an event
+  onRemoveJob(job: Job) {
+    this.jobDataService
+      .deleteJobById(job.id)
+      .subscribe(
+        (_) => {
+          this.jobs = this.jobs.filter(
+            j => j.id !== job.id
+          );
+        }
+      );
+  }
 }
