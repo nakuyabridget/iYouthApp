@@ -47,4 +47,13 @@ export class AppComponent implements OnInit {
         }
       );
   }
+
+  // Method to change job availability triggered by an event
+  onToggleJobAvailability(job: Job) {
+    this.jobDataService
+      .toggleJobAvailability(job)
+      .subscribe(
+        updatedJob => job = updatedJob
+      );
+  }
 }
