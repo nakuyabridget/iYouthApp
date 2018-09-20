@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Job } from './job';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 const API_URL = environment.apiUrl;
 
@@ -15,6 +15,12 @@ export class ApiService {
   // Inject the in-built http innto the constructor
   constructor(private http: Http) { }
 
+  // Custom error handler
+  private handleError(error: Response | any) {
+    console.error('ApiService::handleError', error);
+    return Observable.throw(error);
+  }
+
   // API: GET /jobss
   public getAllJobs(): Observable<Job[]> {
     // will use this.http.get()
@@ -23,7 +29,7 @@ export class ApiService {
       .pipe(map(response => {
         const jobs = response.json();
         return jobs.map((job) => new Job(job));
-      }));
+      }), catchError(this.handleError));
   }
 
   // API: POST /jobs
