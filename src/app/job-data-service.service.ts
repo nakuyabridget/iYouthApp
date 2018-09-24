@@ -34,7 +34,7 @@ export class JobDataServiceService {
 
   // Simulate delete a job
   deleteJobById(jobId: number): Observable<Job> {
-    return this.api.deleteJobById(jobId)
+    return this.api.deleteJobById(jobId);
   }
 
 }
