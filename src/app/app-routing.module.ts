@@ -7,7 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        component: AppComponent
+        redirectTo: 'jobs',
+        pathMatch: 'full'
     },
     {
         path: 'jobs',
