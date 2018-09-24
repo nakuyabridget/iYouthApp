@@ -1,6 +1,8 @@
 import { JobDataServiceService } from './../job-data-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Job } from '../job';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-job',
@@ -10,17 +12,26 @@ import { Job } from '../job';
 export class JobComponent implements OnInit {
 
 
-  constructor(private jobDataService: JobDataServiceService) { }
+  constructor(
+    private jobDataService: JobDataServiceService,
+    private route: ActivatedRoute) { }
 
   // Define a public property job and initial it to an empty list
   jobs: Job[] = [];
 
   public ngOnInit() {
-    this.jobDataService
-      .getAllJobs()
+    this.route.data
+      .pipe(map((data) => data['jobs']))
       .subscribe(
-        jobs => this.jobs = jobs
+        (jobs) => {
+          this.jobs = jobs;
+        }
       );
+    // this.jobDataService
+    //   .getAllJobs()
+    //   .subscribe(
+    //     jobs => this.jobs = jobs
+    //   );
   }
 
   // Method to create a job triggered by an event
