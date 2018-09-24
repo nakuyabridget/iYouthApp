@@ -8,11 +8,13 @@ import { JobComponent } from './job/job.component';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule} from '@angular/forms';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    JobComponent
+    JobComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

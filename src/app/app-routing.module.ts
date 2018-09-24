@@ -1,3 +1,4 @@
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { JobComponent } from './job/job.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: 'jobs',
         component: JobComponent
+    },
+    {
+        path: '**',
+        component: PageNotFoundComponent
     }
 ];
 
