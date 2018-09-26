@@ -13,13 +13,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { AuthComponent } from './auth/auth.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JobComponent,
     PageNotFoundComponent,
-    NavigationComponent
+    NavigationComponent,
+    AuthComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
